@@ -5,13 +5,14 @@ def solution(map):
     w, h = len(map[0]), len(map)
     end = (h - 1, w - 1)
     connections = bfs((0, 0), map, end)
-    if connections != None:
-        dist = 1
-        nxt = end
-        while nxt != (0, 0):
-            nxt = connections[nxt]
-            dist += 1
-        return dist
+    nxt = end
+    dist = 0
+    while nxt != (0, 0):
+        if nxt not in connections:
+            return -1
+        nxt = connections[nxt]
+        dist += 1
+    return dist
 
 
 def get_neighbours(point, end):
@@ -29,9 +30,7 @@ def bfs(point, map, end):
     visited = {}
     search = []
     search.append(point)
-    while end not in connections:
-        if not len(search) > 0:
-            return
+    while len(search) > 0:
         node = search.pop(0)
         neighbours = get_neighbours(node, end)
         for n in neighbours:
