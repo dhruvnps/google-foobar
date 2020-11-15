@@ -5,12 +5,13 @@ def solution(map):
     w, h = len(map[0]), len(map)
     end = (h - 1, w - 1)
     connections = bfs((0, 0), map, end)
-    dist = 1
-    nxt = end
-    while nxt != (0, 0):
-        nxt = connections[nxt]
-        dist += 1
-    return dist
+    if connections != None:
+        dist = 1
+        nxt = end
+        while nxt != (0, 0):
+            nxt = connections[nxt]
+            dist += 1
+        return dist
 
 
 def get_neighbours(point, end):
@@ -27,14 +28,14 @@ def bfs(point, map, end):
     connections = {}
     visited = {}
     search = []
-    visited[point] = True
     search.append(point)
-    while len(search) > 0:
+    while end not in connections:
+        if not len(search) > 0:
+            return
         node = search.pop(0)
         neighbours = get_neighbours(node, end)
         for n in neighbours:
-            if n not in visited and map[n[0]][n[1]] != 1:
-                visited[n] = True
+            if n not in connections and map[n[0]][n[1]] != 1:
                 search.append(n)
                 connections[n] = node
     return connections
@@ -64,7 +65,7 @@ t1 = time.perf_counter()
 print(solution(
     [[0, 1, 1],
      [0, 1, 1],
-     [0, 0, 0]]))
+     [0, 1, 0]]))
 t2 = time.perf_counter()
 print('{:0.3} seconds'.format(t2 - t1))
 
