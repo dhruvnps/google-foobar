@@ -31,7 +31,7 @@ def bfs(start, map, h, w, distmap, visitmap):
                     if (y, x) not in visited:
                         n_is_wall = map[y][x] == 1
                         search.append(((y, x), dist + 1, n_is_wall))
-                        visited[(y, x)] = point
+                        visited[(y, x)] = True
 
 
 t1 = time.perf_counter()
