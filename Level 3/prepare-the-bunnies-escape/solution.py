@@ -3,8 +3,8 @@ import time
 
 def solution(map):
     h, w = len(map), len(map[0])
-    distmap = [[1 for x in range(w)] for y in range(h)]
-    visitmap = [[0 for x in range(w)] for y in range(h)]
+    distmap = [[1] * w for y in range(h)]
+    visitmap = [[0] * w for y in range(h)]
     bfs((0, 0), map, h, w, distmap, visitmap)
     bfs((h - 1, w - 1), map, h, w, distmap, visitmap)
     minpath = 20 * 20
