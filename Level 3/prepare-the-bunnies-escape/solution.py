@@ -7,25 +7,16 @@ def solution(map):
     visitmap = [[0 for x in range(w)] for y in range(h)]
     bfs((0, 0), map, h, w, distmap, visitmap)
     bfs((h - 1, w - 1), map, h, w, distmap, visitmap)
-    vals = []
+    minpath = 20 * 20
     for y in range(h):
         for x in range(w):
-            if visitmap[y][x] == 2:
-                vals.append(distmap[y][x])
-    return(min(vals))
-
-
-def get_neighbours(point, h, w):
-    get = []
-    neighbours = [(-1, 0), (0, -1), (0, 1), (1, 0)]
-    for n in neighbours:
-        y, x = [point[i] + n[i] for i in [0, 1]]
-        if h > y >= 0 and w > x >= 0:
-            get.append((y, x))
-    return get
+            if visitmap[y][x] == 2 and distmap[y][x] < minpath:
+                minpath = distmap[y][x]
+    return minpath
 
 
 def bfs(start, map, h, w, distmap, visitmap):
+    deltas = [(-1, 0), (0, -1), (0, 1), (1, 0)]
     visited = {}
     search = []
     search.append((start, 0, False))
@@ -35,12 +26,13 @@ def bfs(start, map, h, w, distmap, visitmap):
             distmap[point[0]][point[1]] += dist
             visitmap[point[0]][point[1]] += 1
         if not is_wall:
-            neighbours = get_neighbours(point, h, w)
-            for n in neighbours:
-                if n not in visited:
-                    n_is_wall = map[n[0]][n[1]] == 1
-                    search.append((n, dist + 1, n_is_wall))
-                    visited[n] = point
+            for d in deltas:
+                y, x = [point[i] + d[i] for i in [0, 1]]
+                if h > y >= 0 and w > x >= 0:
+                    if (y, x) not in visited:
+                        n_is_wall = map[y][x] == 1
+                        search.append(((y, x), dist + 1, n_is_wall))
+                        visited[(y, x)] = point
 
 
 t1 = time.perf_counter()
