@@ -2,11 +2,12 @@ import time
 
 
 def solution(map):
-    w, h = len(map[0]), len(map)
+    h, w = len(map), len(map[0])
     start = (0, 0)
     end = (h - 1, w - 1)
     # start, end = end, start
-    connections = bfs(start, map, h, w)
+    distmap = [[0 for x in range(w)] for y in range(h)]
+    connections = bfs(start, map, h, w, distmap)
     nxt = end
     dist = 1
     while nxt != start:
@@ -27,18 +28,21 @@ def get_neighbours(point, h, w):
     return get
 
 
-def bfs(point, map, h, w):
+def bfs(point, map, h, w, distmap):
     connections = {}
     visited = {}
     search = []
-    search.append(point)
+    search.append((point, 0))
     while len(search) > 0:
         node = search.pop(0)
-        neighbours = get_neighbours(node, h, w)
+        neighbours = get_neighbours(node[0], h, w)
         for n in neighbours:
-            if n not in connections and map[n[0]][n[1]] != 1:
-                search.append(n)
-                connections[n] = node
+            if n not in connections:
+                if map[n[0]][n[1]] != 1:
+                    search.append((n, node[1] + 1))
+                connections[n] = node[0]
+                distmap[node[0][0]][node[0][1]] = node[1]
+    print(distmap)
     return connections
 
 
