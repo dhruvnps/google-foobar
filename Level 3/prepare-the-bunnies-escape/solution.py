@@ -18,8 +18,7 @@ def solution(map):
 def bfs(start, map, h, w, distmap, visitmap):
     deltas = [(-1, 0), (0, -1), (0, 1), (1, 0)]
     visited = {}
-    search = []
-    search.append((start, 0, False))
+    search = [(start, 0, False)]
     while len(search) > 0:
         (point, dist, is_wall) = search.pop(0)
         if point != start:
