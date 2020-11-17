@@ -4,11 +4,11 @@ import time
 def solution(map):
     w, h = len(map[0]), len(map)
     start = (0, 0)
-    end = (w - 1, h - 1)
+    end = (h - 1, w - 1)
     # start, end = end, start
     connections = bfs(start, map, h, w)
     nxt = end
-    dist = 0
+    dist = 1
     while nxt != start:
         if nxt not in connections:
             return -1
@@ -47,6 +47,7 @@ print(solution(
     [[0, 1, 1, 0],
      [0, 0, 0, 1],
      [1, 1, 0, 0],
+     [1, 1, 1, 0],
      [1, 1, 1, 0]]))
 t2 = time.perf_counter()
 print('{:0.3} seconds'.format(t2 - t1))
