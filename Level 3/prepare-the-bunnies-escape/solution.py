@@ -1,21 +1,23 @@
 import time
+import math
 
 
 def solution(map):
     h, w = len(map), len(map[0])
     start = (0, 0)
     end = (h - 1, w - 1)
-    # start, end = end, start
-    distmap = [[0 for x in range(w)] for y in range(h)]
-    connections = bfs(start, map, h, w, distmap)
-    nxt = end
-    dist = 1
-    while nxt != start:
-        if nxt not in connections:
-            return -1
-        nxt = connections[nxt]
-        dist += 1
-    return dist
+    distmap = [[1 for x in range(w)] for y in range(h)]
+    bfs(start, map, h, w, distmap)
+    bfs(end, map, h, w, distmap)
+
+    for y in distmap:
+        for x in y:
+            if x < 10:
+                print('0', end='')
+            if x < 100:
+                print('0', end='')
+            print(x, end='. ')
+        print()
 
 
 def get_neighbours(point, h, w):
@@ -29,21 +31,23 @@ def get_neighbours(point, h, w):
 
 
 def bfs(point, map, h, w, distmap):
-    connections = {}
     visited = {}
     search = []
-    search.append((point, 0))
+    search.append((point, 0, True))
     while len(search) > 0:
         node = search.pop(0)
+        if node[0] != point:
+            distmap[node[0][0]][node[0][1]] += node[1]
+        if not node[2]:
+            continue
         neighbours = get_neighbours(node[0], h, w)
         for n in neighbours:
-            if n not in connections:
-                if map[n[0]][n[1]] != 1:
-                    search.append((n, node[1] + 1))
-                connections[n] = node[0]
-                distmap[node[0][0]][node[0][1]] = node[1]
-    print(distmap)
-    return connections
+            if n not in visited:
+                can_remove = True
+                if map[n[0]][n[1]] == 1:
+                    can_remove = False
+                search.append((n, node[1] + 1, can_remove))
+                visited[n] = node[0]
 
 
 t1 = time.perf_counter()
@@ -51,7 +55,7 @@ print(solution(
     [[0, 1, 1, 0],
      [0, 0, 0, 1],
      [1, 1, 0, 0],
-     [1, 1, 1, 0],
+     [1, 1, 1, 1],
      [1, 1, 1, 0]]))
 t2 = time.perf_counter()
 print('{:0.3} seconds'.format(t2 - t1))
@@ -83,8 +87,8 @@ print(solution(
      [1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
      [1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
      [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-     [1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
-     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+     [1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+     [0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
      [0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
      [0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
