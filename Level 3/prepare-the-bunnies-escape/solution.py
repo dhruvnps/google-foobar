@@ -1,5 +1,4 @@
 import time
-import math
 
 
 def solution(map):
@@ -7,17 +6,15 @@ def solution(map):
     start = (0, 0)
     end = (h - 1, w - 1)
     distmap = [[1 for x in range(w)] for y in range(h)]
-    bfs(start, map, h, w, distmap)
-    bfs(end, map, h, w, distmap)
-
-    for y in distmap:
-        for x in y:
-            if x < 10:
-                print('0', end='')
-            if x < 100:
-                print('0', end='')
-            print(x, end='. ')
-        print()
+    visitmap = [[0 for x in range(w)] for y in range(h)]
+    bfs((0, 0), map, h, w, distmap, visitmap)
+    bfs((h - 1, w - 1), map, h, w, distmap, visitmap)
+    vals = []
+    for y in range(h):
+        for x in range(w):
+            if visitmap[y][x] == 2:
+                vals.append(distmap[y][x])
+    return(min(vals))
 
 
 def get_neighbours(point, h, w):
@@ -30,7 +27,7 @@ def get_neighbours(point, h, w):
     return get
 
 
-def bfs(point, map, h, w, distmap):
+def bfs(point, map, h, w, distmap, visitmap):
     visited = {}
     search = []
     search.append((point, 0, True))
@@ -38,6 +35,7 @@ def bfs(point, map, h, w, distmap):
         node = search.pop(0)
         if node[0] != point:
             distmap[node[0][0]][node[0][1]] += node[1]
+            visitmap[node[0][0]][node[0][1]] += 1
         if not node[2]:
             continue
         neighbours = get_neighbours(node[0], h, w)
