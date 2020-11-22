@@ -1,24 +1,18 @@
 def solution(entrances, exits, path):
-    start = len(path)
-    end = len(path) + 1
-    path.extend(
-        [[float('inf') if n in entrances else 0
-          for n in range(len(path))],
-         [0] * len(path)])
-    for n, y in enumerate(path):
-        y.extend([0, float('inf') if n in exits else 0])
-    parent = {}
     maxflow = 0
+    parent = {}
+    start, end = terminal_nodes(entrances, exits, path)
     while bfs(start, end, path, parent):
         flow = float('inf')
-        e = end
-        while e != start:
-            flow = min(flow, path[parent[e]][e])
-            e = parent[e]
-        e = end
-        while e != start:
-            path[parent[e]][e] -= flow
-            e = parent[e]
+        n = end
+        while n != start:
+            flow = min(flow, path[parent[n]][n])
+            n = parent[n]
+        n = end
+        while n != start:
+            path[parent[n]][n] -= flow
+            path[n][parent[n]] += flow
+            n = parent[n]
         maxflow += flow
     return maxflow
 
@@ -34,6 +28,15 @@ def bfs(start, end, path, parent):
                 parent[n] = node
                 search.append(n)
     return end in visited
+
+
+def terminal_nodes(entrances, exits, path):
+    path.extend([[0] * len(path) for _ in range(2)])
+    for n in entrances:
+        path[-2][n] = float('inf')
+    for n in range(len(path)):
+        path[n].extend([0, float('inf') if n in exits else 0])
+    return len(path) - 2, len(path) - 1
 
 
 print(solution(
