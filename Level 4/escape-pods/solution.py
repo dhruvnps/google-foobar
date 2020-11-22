@@ -1,8 +1,15 @@
 def solution(entrances, exits, path):
+    start = len(path)
+    end = len(path) + 1
+    path.extend(
+        [[float('inf') if n in entrances else 0
+          for n, x in enumerate(path)],
+         [0] * len(path)])
+    path = [
+        y + [0, float('inf') if n in exits else 0]
+        for n, y in enumerate(path)]
     parent = {}
     maxflow = 0
-    start = entrances[0]
-    end = exits[0]
     while bfs(start, end, path, parent):
         flow = float('inf')
         e = end
@@ -23,16 +30,11 @@ def bfs(start, end, path, parent):
     while len(search) > 0:
         node = search.pop(0)
         for n in range(len(path)):
-            if n not in visited:
-                if valid_traversal(node, n, path):
-                    visited[n] = True
-                    parent[n] = node
-                    search.append(n)
+            if n not in visited and path[node][n] > 0:
+                visited[n] = True
+                parent[n] = node
+                search.append(n)
     return end in visited
-
-
-def valid_traversal(a, b, path):
-    return path[a][b] > 0
 
 
 print(solution(
