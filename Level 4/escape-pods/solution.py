@@ -3,11 +3,10 @@ def solution(entrances, exits, path):
     end = len(path) + 1
     path.extend(
         [[float('inf') if n in entrances else 0
-          for n, x in enumerate(path)],
+          for n in range(len(path))],
          [0] * len(path)])
-    path = [
-        y + [0, float('inf') if n in exits else 0]
-        for n, y in enumerate(path)]
+    for n, y in enumerate(path):
+        y.extend([0, float('inf') if n in exits else 0])
     parent = {}
     maxflow = 0
     while bfs(start, end, path, parent):
@@ -16,11 +15,11 @@ def solution(entrances, exits, path):
         while e != start:
             flow = min(flow, path[parent[e]][e])
             e = parent[e]
-        maxflow += flow
         e = end
         while e != start:
             path[parent[e]][e] -= flow
             e = parent[e]
+        maxflow += flow
     return maxflow
 
 
@@ -52,43 +51,3 @@ print(solution(
      [0, 0, 0, 0, 6, 6],
      [0, 0, 0, 0, 0, 0],
      [0, 0, 0, 0, 0, 0]]))
-
-
-# def solution(entrances, exits, path):
-#     parent = {}
-#     maxflow = 0
-#     graph = {
-#         'cap': path,
-#         'flow': [[0] * len(path) for y in path]
-#     }
-#     while bfs(entrances[0], exits[0], graph, parent):
-#         flow = float('inf')
-#         e = exits[0]
-#         s = entrances[0]
-#         while e != s:
-#             flow = min(flow, graph['cap'][parent[e]][e])
-#             e = parent[e]
-#         maxflow += flow
-#         e = exits[0]
-#         while e != s:
-#             graph['cap'][parent[e]][e] -= flow
-#             e = parent[e]
-#     return maxflow
-
-
-# def bfs(start, end, graph, parent):
-#     visited = {}
-#     search = [start]
-#     while len(search) > 0:
-#         node = search.pop(0)
-#         for n in range(len(graph['cap'])):
-#             if n not in visited:
-#                 if valid_traversal(node, n, graph):
-#                     visited[n] = True
-#                     parent[n] = node
-#                     search.append(n)
-#     return end in visited
-
-
-# def valid_traversal(a, b, graph):
-#     return graph['cap'][a][b] > 0
