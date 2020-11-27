@@ -2,13 +2,11 @@ def solution(dimensions, a, b, distance):
     w, h = [(b[i], dimensions[i] - b[i]) for i in [0, 1]]
     x, y = b
     x_vals, y_vals = [x, -x], [y, -y]
-    t = 1
-    for i in range(distance // min(dimensions) + 1):
-        x += w[t] * 2
-        y += h[t] * 2
+    for i in range(-1, distance // min(dimensions)):
+        x += w[i & 1] * 2
+        y += h[i & 1] * 2
         x_vals.extend([x, -x])
         y_vals.extend([y, -y])
-        t = abs(t - 1)
     bearings = []
     for x in x_vals:
         for y in y_vals:
