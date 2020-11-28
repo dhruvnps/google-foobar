@@ -1,4 +1,5 @@
 def f(dimensions, a, b, distance):
+    d2 = distance ** 2
     w, h = [(b[i], dimensions[i] - b[i]) for i in [0, 1]]
     x, y = b
     x_vals, y_vals = [x, -x], [y, -y]
@@ -8,16 +9,13 @@ def f(dimensions, a, b, distance):
         x_vals.extend([x, -x])
         y_vals.extend([y, -y])
     vectors = []
-    n=0
     for x in x_vals:
         for y in y_vals:
-            print(n)
-            n+=1
-            d = ((x - a[0]) ** 2 + (y - a[1]) ** 2) ** 0.5
-            if d < distance:
+            d = ((x - a[0]) ** 2 + (y - a[1]) ** 2)
+            if d < d2:
                 vector = (x - a[0], y - a[1])
-                #if not any(equals(v, vector) for v in vectors):
-                vectors.append(vector)
+                if not any(equals(v, vector) for v in vectors):
+                    vectors.append(vector)
     return vectors
 
 
@@ -44,11 +42,11 @@ def solution(dimensions, a, b, distance):
     return len(l1) - c
 
 
-#print(solution([3, 2], [1, 1], [2, 1], 4)) #7
-#print(solution([300, 275], [150, 150], [185, 100], 500)) #9
-#print(solution([2, 5], [1, 2], [1, 4], 11)) #27
-#print(solution([10,10], [4, 4], [3, 3], 5000)) #739323
-print(solution([23,10], [6, 4], [3, 2], 2300)) #8
+print(solution([3, 2], [1, 1], [2, 1], 4))  # 7
+print(solution([300, 275], [150, 150], [185, 100], 500))  # 9
+print(solution([2, 5], [1, 2], [1, 4], 11))  # 27
+print(solution([23, 10], [6, 4], [3, 2], 23))  # 8
+print(solution([10, 10], [4, 4], [3, 3], 5000))  # 739323
 
 '''
 def solution(dimensions, a, b, distance):
