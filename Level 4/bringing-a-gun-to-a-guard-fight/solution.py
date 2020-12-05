@@ -6,15 +6,15 @@ def solution(dims, a, b, dist):
     b_mirr = mirr_vals(dist, dims, b)
     vectors = []
     dists = {}
-    for i in [0, 1]:
-        for x in [a_mirr, b_mirr][i][0]:
-            for y in [a_mirr, b_mirr][i][1]:
+    for mirr in [a_mirr, b_mirr]:
+        for x in mirr[0]:
+            for y in mirr[1]:
                 d = ((x - a[0]) ** 2 + (y - a[1]) ** 2)
                 v = math.atan2(y - a[1], x - a[0])
                 if d <= dist ** 2 and d != 0:
                     if not (v in dists and dists[v] <= d):
                         dists[v] = d
-                        if i == 1:
+                        if mirr == b_mirr:
                             vectors.append(v)
     return len(set(vectors))
 
