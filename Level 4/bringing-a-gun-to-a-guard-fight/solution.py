@@ -5,7 +5,7 @@ def solution(dims, a, b, dist):
     a_mirr = mirr_vals(dist, dims, a)
     b_mirr = mirr_vals(dist, dims, b)
     vectors = []
-    dists = {}
+    cast = {}
     for mirr in [a_mirr, b_mirr]:
         for x in mirr[0]:
             for y in mirr[1]:
@@ -13,8 +13,8 @@ def solution(dims, a, b, dist):
                 d = dy ** 2 + dx ** 2
                 v = math.atan2(dy, dx)
                 if d <= dist ** 2 and d != 0:
-                    if not (v in dists and dists[v] <= d):
-                        dists[v] = d
+                    if not (v in cast and cast[v] <= d):
+                        cast[v] = d
                         if mirr == b_mirr:
                             vectors.append(v)
     return len(set(vectors))
