@@ -9,8 +9,9 @@ def solution(dims, a, b, dist):
     for mirr in [a_mirr, b_mirr]:
         for x in mirr[0]:
             for y in mirr[1]:
-                d = ((x - a[0]) ** 2 + (y - a[1]) ** 2)
-                v = math.atan2(y - a[1], x - a[0])
+                dy, dx = y - a[1], x - a[0]
+                d = dy ** 2 + dx ** 2
+                v = math.atan2(dy, dx)
                 if d <= dist ** 2 and d != 0:
                     if not (v in dists and dists[v] <= d):
                         dists[v] = d
