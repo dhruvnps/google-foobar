@@ -14,9 +14,9 @@ def solution(dims, a, b, dist):
                 v = math.atan2(dy, dx)
                 if d <= dist ** 2 and d != 0:
                     if not (v in cast and cast[v] <= d):
-                        cast[v] = d
                         if mirr == b_mirr:
                             vectors.append(v)
+                        cast[v] = d
     return len(set(vectors))
 
 
