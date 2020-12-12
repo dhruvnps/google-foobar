@@ -12,7 +12,7 @@ Challenges left to complete level: **1**
 |[Level 1](https://github.com/dhruvnps/google-foobar/tree/master/Level%201)|**100%**|
 |[Level 2](https://github.com/dhruvnps/google-foobar/tree/master/Level%202)|**100%**|
 |[Level 3](https://github.com/dhruvnps/google-foobar/tree/master/Level%203)|**100%**|
-|[Level 4](https://github.com/dhruvnps/google-foobar/tree/master/Level%205)|**100%**|
+|[Level 4](https://github.com/dhruvnps/google-foobar/tree/master/Level%204)|**100%**|
 |Level 5|0%|
 
 ## Overview
