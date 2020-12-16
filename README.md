@@ -4,8 +4,8 @@
 
 ## Progress
 
-*Current level: **5** *   
-*Challenges left to complete level: **1** *
+*Current level: **5***   
+*Challenges left to complete level: **1***
 
 |Level|Status|
 |-|-|
