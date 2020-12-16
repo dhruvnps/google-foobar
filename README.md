@@ -1,11 +1,11 @@
 # My solutions to Google Foobar
 
-Google Foobar is Google's secret hiring challenge made up of 5 different levels of increasing difficulty. Each level has between one and three questions. Levels 1 to 3 are 7 days per question, level 4 is 15 days per question and level 5 is 22 days.
+> Google Foobar is Google's secret hiring challenge made up of 5 different levels with increasing difficulty. Each level has between one and three questions. Levels 1 to 3 are 7 days per question, level 4 is 15 days per question and level 5 is 22 days.
 
 ## Progress
 
-Current level: **5**  
-Challenges left to complete level: **1**
+*Current level: **5** *   
+*Challenges left to complete level: **1** *
 
 |Level|Status|
 |-|-|
