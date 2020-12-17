@@ -38,7 +38,7 @@ Write a function solution(g) where g is an array of array of bools saying whethe
 
 Test cases
 ==========
-Your code should pass the following test cases.     
+Your code should pass the following test cases.
 Note that it may also be run against hidden test cases not shown here.
 
 -- Python cases --  
