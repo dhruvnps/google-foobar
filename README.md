@@ -1,6 +1,6 @@
 # My solutions to Google Foobar
 
-> Google Foobar is Google's secret hiring challenge made up of 5 different levels with increasing difficulty. Each level has between one and three questions. Levels 1 to 3 are 7 days per question, level 4 is 15 days per question and level 5 is 22 days.
+> [Google Foobar](https://foobar.withgoogle.com/) is Google's secret hiring challenge made up of 5 different levels with increasing difficulty. Each level has between one and three questions. Levels 1 to 3 are 7 days per question, level 4 is 15 days per question and level 5 is 22 days for one question.
 
 ## Progress
 
@@ -47,4 +47,4 @@ Part 1: **[escape-pods](https://github.com/dhruvnps/google-foobar/tree/master/Le
 > A maximum flow problem with multiple entrance and exit rooms, and intermedeate rooms connected to one another by uni-directional corridors each having a maximum capacity. The maximum flow was found using the Ford Fulkerson method with a breadth first search.
 
 Part 2: **[bringing-a-gun-to-a-guard-fight](https://github.com/dhruvnps/google-foobar/tree/master/Level%204/bringing-a-gun-to-a-guard-fight)**
-> Involves a room with specified dimentions in which there are two specified points, A and B. A laser can be shot from point A which can reflect off the walls of the room. The laser will stop if it hits A or B, or if the laser has traveled its maximum distance which is specified. The number of angles the the laser can be shot from A such that it hits be and not A must be found. This problem can be solved by reflecting the room in across each wall. The angles that the laser can travel from A to any reflection of B without hitting A can then be found.
+> Involves a room with specified dimentions in which there are two specified points, A and B. A laser can be shot from point A which can reflect off the walls of the room. The laser will stop if it hits A or B, or if the laser has traveled a given maximum distance. The number of angles the the laser can be shot from A such that it hits B and not A must be found. This problem can be solved by reflecting the room in across each wall. The angles that the laser can travel from A to any reflection of B without hitting a reflection of A can then be found.
