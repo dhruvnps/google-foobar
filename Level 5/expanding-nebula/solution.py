@@ -8,17 +8,17 @@ def solution(g):
     return dfs(nodes_list(cols(g), len(g)), 0, None, {})
 
 
-def dfs(nodes_list, depth, node, memo):
-    if node != None and (depth, node[0], node[1]) in memo:
-        return memo[(depth, node[0], node[1])]
+def dfs(nodes_list, depth, node, mem):
+    if node != None and (depth, node[0], node[1]) in mem:
+        return mem[(depth, node[0], node[1])]
     c = 0
     if depth == len(nodes_list):
         return 1
     for nxt_node in nodes_list[depth]:
         if node == None or nxt_node[0] == node[1]:
-            c += dfs(nodes_list, depth + 1, nxt_node, memo)
+            c += dfs(nodes_list, depth + 1, nxt_node, mem)
     if node != None:
-        memo[(depth, node[0], node[1])] = c
+        mem[(depth, node[0], node[1])] = c
     return c
 
 
