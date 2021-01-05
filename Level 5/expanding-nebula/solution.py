@@ -5,30 +5,43 @@ _ = False
 
 
 def solution(g):
-    h = len(g)
-    nodes_list = [preimages(col, h) for col in cols(g)]
-    c = [0]
-    dfs(None, nodes_list, 0, c)
-    return c[0]
+    return dfs(nodes_list(cols(g), len(g)), 0, None, {})
 
 
-def dfs(node, nodes_list, depth, c):
+def dfs(nodes_list, depth, node, memo):
+    if node != None and (depth, node[0], node[1]) in memo:
+        return memo[(depth, node[0], node[1])]
+    c = 0
     if depth == len(nodes_list):
-        c[0] += 1
-        return
+        return 1
     for nxt_node in nodes_list[depth]:
         if node == None or nxt_node[0] == node[1]:
-            dfs(nxt_node, nodes_list, depth + 1, c)
+            c += dfs(nodes_list, depth + 1, nxt_node, memo)
+    if node != None:
+        memo[(depth, node[0], node[1])] = c
+    return c
 
 
-def preimages(col, h):
-    pre_list = []
+def nodes_list(cols, h):
+    nodes_list = [[] for _ in cols]
     for n1 in range(2 ** (h + 1)):
         for n2 in range(2 ** (h + 1)):
-            pre = [n1, n2]
-            if check(pre, col, h):
-                pre_list.append(pre)
-    return pre_list
+            nxt_col = nxt([n1, n2], h)
+            for idx, col in enumerate(cols):
+                if col == nxt_col:
+                    nodes_list[idx].append([n1, n2])
+    return nodes_list
+
+
+def nxt(prev, h):
+    n = 0
+    for idx in range(h):
+        c = ((prev[0] >> idx & 1) +
+             (prev[1] >> idx & 1) +
+             (prev[0] >> (idx + 1) & 1) +
+             (prev[1] >> (idx + 1) & 1))
+        n = (n << 1) + (c == 1)
+    return n
 
 
 def cols(g):
@@ -39,17 +52,6 @@ def cols(g):
             n = (n << 1) + i[idx]
         cols.append(n)
     return cols
-
-
-def check(pre, col, h):
-    for idx in range(h):
-        c = ((pre[0] >> idx & 1) +
-             (pre[1] >> idx & 1) +
-             (pre[0] >> (idx + 1) & 1) +
-             (pre[1] >> (idx + 1) & 1))
-        if col >> idx & 1 != (c == 1):
-            return False
-    return True
 
 
 # 4
