@@ -9,8 +9,8 @@ def solution(g):
 
 
 def dfs(nodes_list, depth, node, mem):
-    if node != None and (depth, node[0], node[1]) in mem:
-        return mem[(depth, node[0], node[1])]
+    if node != None and tuple([depth] + node) in mem:
+        return mem[tuple([depth] + node)]
     c = 0
     if depth == len(nodes_list):
         return 1
@@ -18,7 +18,7 @@ def dfs(nodes_list, depth, node, mem):
         if node == None or nxt_node[0] == node[1]:
             c += dfs(nodes_list, depth + 1, nxt_node, mem)
     if node != None:
-        mem[(depth, node[0], node[1])] = c
+        mem[tuple([depth] + node)] = c
     return c
 
 
