@@ -6,10 +6,10 @@ _ = False
 
 def solution(g):
     cols = []
-    for col in zip(*g):
+    for bitlist in zip(*g):
         n = 0
-        for i in col:
-            n = n << 1 | i
+        for bit in bitlist:
+            n = n << 1 | bit
         cols.append(n)
     return dfs(nodes_list(cols, len(g)), {})
 
@@ -29,8 +29,8 @@ def dfs(nodes_list, mem, depth=0, node=()):
 
 def nodes_list(cols, h):
     nodes_list = [[] for _ in cols]
-    for n1 in range(2 ** (h + 1)):
-        for n2 in range(2 ** (h + 1)):
+    for n1 in range(2 << h):
+        for n2 in range(2 << h):
             img = col_img((n1, n2), h)
             for idx, col in enumerate(cols):
                 if col == img:
