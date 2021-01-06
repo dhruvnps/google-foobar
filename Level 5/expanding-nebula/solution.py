@@ -5,21 +5,20 @@ _ = False
 
 
 def solution(g):
-    return dfs(nodes_list(cols(g), len(g)), 0, None, {})
+    return dfs(nodes_list(cols(g), len(g)), {})
 
 
-def dfs(nodes_list, depth, node, mem):
-    if node != None and tuple([depth] + node) in mem:
-        return mem[tuple([depth] + node)]
-    c = 0
+def dfs(nodes_list, mem, depth=0, node=[]):
     if depth == len(nodes_list):
         return 1
-    for nxt_node in nodes_list[depth]:
-        if node == None or nxt_node[0] == node[1]:
-            c += dfs(nodes_list, depth + 1, nxt_node, mem)
-    if node != None:
-        mem[tuple([depth] + node)] = c
-    return c
+    key = tuple([depth] + node)
+    if key in mem:
+        return mem[key]
+    mem[key] = 0
+    for adj in nodes_list[depth]:
+        if not node or node[1] == adj[0]:
+            mem[key] += dfs(nodes_list, mem, depth + 1, adj)
+    return mem[key]
 
 
 def nodes_list(cols, h):
@@ -46,10 +45,10 @@ def nxt(prev, h):
 
 def cols(g):
     cols = []
-    for idx in range(len(g[0])):
+    for col in zip(*g):
         n = 0
-        for i in g:
-            n = (n << 1) + i[idx]
+        for i in col:
+            n = n << 1 | i
         cols.append(n)
     return cols
 
