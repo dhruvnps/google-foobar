@@ -50,5 +50,5 @@ Part 2: **[bringing-a-gun-to-a-guard-fight](https://github.com/dhruvnps/google-f
 
 ### Level 5
 
-Part 1: **[expanding-nebula](https://github.com/dhruvnps/google-foobar/tree/master/Level%205)**
+Part 1: **[expanding-nebula](https://github.com/dhruvnps/google-foobar/tree/master/Level%205/expanding-nebula)**
 > A cellular automata problem. Involves finding the number of pre-images that result in a given image following the specified rules for cellular automation. The given image is a grid of cells with a maximum size of 9x50 that are either empty or full. The problem can be solved by brute force generating all possible 2x(h+1) pre-images that result in each 1xh column image. The number of possible pre-images that result in the full image is the number of paths that can be found by chaining these 2x(h+1) pre-image nodes where adjacent nodes have halves that overlap. This was done using a depth first search with memoization.
