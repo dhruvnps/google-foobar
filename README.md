@@ -4,16 +4,15 @@
 
 ## Progress
 
-*Current level: **5***   
-*Challenges left to complete level: **1***
+All levels completed!
 
-|Level|Status|
-|-|-|
-|[Level 1](https://github.com/dhruvnps/google-foobar/tree/master/Level%201)|**100%**|
-|[Level 2](https://github.com/dhruvnps/google-foobar/tree/master/Level%202)|**100%**|
-|[Level 3](https://github.com/dhruvnps/google-foobar/tree/master/Level%203)|**100%**|
-|[Level 4](https://github.com/dhruvnps/google-foobar/tree/master/Level%204)|**100%**|
-|Level 5|0%|
+| Level                                                                      | Status   |
+| -------------------------------------------------------------------------- | -------- |
+| [Level 1](https://github.com/dhruvnps/google-foobar/tree/master/Level%201) | **100%** |
+| [Level 2](https://github.com/dhruvnps/google-foobar/tree/master/Level%202) | **100%** |
+| [Level 3](https://github.com/dhruvnps/google-foobar/tree/master/Level%203) | **100%** |
+| [Level 4](https://github.com/dhruvnps/google-foobar/tree/master/Level%204) | **100%** |
+| [Level 5](https://github.com/dhruvnps/google-foobar/tree/master/Level%205) | **100%** |
 
 ## Overview
 
@@ -47,4 +46,9 @@ Part 1: **[escape-pods](https://github.com/dhruvnps/google-foobar/tree/master/Le
 > A maximum flow problem with multiple entrance and exit rooms, and intermedeate rooms connected to one another by uni-directional corridors each having a maximum capacity. The maximum flow was found using the Ford Fulkerson method with a breadth first search.
 
 Part 2: **[bringing-a-gun-to-a-guard-fight](https://github.com/dhruvnps/google-foobar/tree/master/Level%204/bringing-a-gun-to-a-guard-fight)**
-> Involves a room with specified dimentions in which there are two specified points, A and B. A laser can be shot from point A which can reflect off the walls of the room. The laser will stop if it hits A or B, or if the laser has traveled a given maximum distance. The number of angles the the laser can be shot from A such that it hits B and not A must be found. This problem can be solved by reflecting the room in across each wall. The angles that the laser can travel from A to any reflection of B without hitting a reflection of A can then be found.
+> Involves a room with specified dimensions in which there are two specified points, A and B. A laser can be shot from point A which can reflect off the walls of the room. The laser will stop if it hits A or B, or if the laser has traveled a given maximum distance. The number of angles the the laser can be shot from A such that it hits B and not A must be found. This problem can be solved by reflecting the room in across each wall. The angles that the laser can travel from A to any reflection of B without hitting a reflection of A can then be found.
+
+### Level 5
+
+Part 1: **[expanding-nebula](https://github.com/dhruvnps/google-foobar/tree/master/Level%205)**
+> A cellular automata problem. Involves finding the number of pre-images that result in a given image following the specified rules for cellular automation. The given image is a grid of cells with a maximum size of 9x50 that are either empty or full. The problem can be solved by brute force generating all possible 2x(h+1) pre-images that result in each 1xh column image. The number of possible pre-images that result in the full image is the number of paths that can be found by chaining these 2x(h+1) pre-image nodes where adjacent nodes have halves that overlap. This was done using a depth first search with memoization.
